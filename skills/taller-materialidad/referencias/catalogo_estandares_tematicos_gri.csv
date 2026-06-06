@@ -1,0 +1,32 @@
+Serie,Código,Nombre oficial del estándar,Dimensión
+Económica,GRI 201,Desempeño económico,G
+Económica,GRI 202,Presencia en el mercado,S
+Económica,GRI 203,Impactos económicos indirectos,S
+Económica,GRI 204,Prácticas de adquisición,G
+Económica,GRI 205,Anticorrupción,G
+Económica,GRI 206,Competencia desleal,G
+Económica,GRI 207,Fiscalidad,G
+Ambiental,GRI 301,Materiales,E
+Ambiental,GRI 302,Energía,E
+Ambiental,GRI 303,Agua y efluentes,E
+Ambiental,GRI 304,Biodiversidad,E
+Ambiental,GRI 305,Emisiones,E
+Ambiental,GRI 306,Residuos,E
+Ambiental,GRI 308,Evaluación ambiental de proveedores,E
+Social,GRI 401,Empleo,S
+Social,GRI 402,Relaciones trabajador-empresa,S
+Social,GRI 403,Salud y seguridad en el trabajo,S
+Social,GRI 404,Formación y enseñanza,S
+Social,GRI 405,Diversidad e igualdad de oportunidades,S
+Social,GRI 406,No discriminación,S
+Social,GRI 407,Libertad de asociación y negociación colectiva,S
+Social,GRI 408,Trabajo infantil,S
+Social,GRI 409,Trabajo forzoso u obligatorio,S
+Social,GRI 410,Prácticas en materia de seguridad,S
+Social,GRI 411,Derechos de los pueblos indígenas,S
+Social,GRI 413,Comunidades locales,S
+Social,GRI 414,Evaluación social de proveedores,S
+Social,GRI 415,Política pública,G
+Social,GRI 416,Salud y seguridad de los clientes,S
+Social,GRI 417,Marketing y etiquetado,S
+Social,GRI 418,Privacidad del cliente,S

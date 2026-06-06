@@ -1,0 +1,16 @@
+{
+  "id": "diagnostico-horizonte",
+  "name": "Diagnóstico Horizonte",
+  "description": "Diagnóstico ESG, análisis de materialidad y batería de indicadores GRI/SASB. Por Horizonte Sostenible.",
+  "icon": "Compass",
+  "category": "business",
+  "author": "Horizonte Sostenible S.A.S. B.I.C.",
+  "tags": ["esg", "sostenibilidad", "materialidad", "gri", "sasb", "issb", "colombia"],
+  "tabs": [
+    { "id": "chat", "label": "Diagnóstico", "builtIn": "board", "badge": "activity" },
+    { "id": "files", "label": "Evidencias", "builtIn": "files" },
+    { "id": "integrations", "label": "Conexiones", "builtIn": "integrations" },
+    { "id": "job-description", "label": "Instrucciones", "builtIn": "job-description" }
+  ],
+  "defaultTab": "chat"
+}
