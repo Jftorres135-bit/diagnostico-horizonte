@@ -43,12 +43,14 @@ Genera un universo de **25-30 temas candidatos**. Para cada tema:
 - **fuente**: "GRI 2021" | "SASB" | "ESRS" | "Regulación colombiana" | "Múltiple"
 - **relevancia_sectorial**: "Alta" | "Media" | "Baja"
 - **urgencia_regulatoria_colombia**: "Alta" | "Media" | "Baja"
-- **codigo_estandar**: el código específico SOLO si lo verificas en
-  `referencias/codigos_estandares.csv`. Si no está ahí, deja el campo como
-  "por confirmar" y dilo. **Nunca inventes un código.** (Ver regla abajo.)
+- **codigo_estandar**: el código específico SOLO si lo verificas en las tablas de
+  referencia incrustadas más abajo en este archivo (Tabla A y Tabla B). Si no está
+  ahí, deja el campo como "por confirmar" y dilo. **Nunca inventes un código.**
 
-Devuelve esto como **JSON válido**, array de objetos, sin markdown ni texto
-adicional alrededor, para que se pueda guardar directamente.
+**Presenta los temas en pantalla como una tabla legible en español** (ver sección
+"Formato de salida y entregables" al final). Mantén internamente la estructura de
+datos (JSON) para las etapas siguientes, pero no la muestres como respuesta
+principal. Ofrece exportar a Excel; genera el archivo solo si te lo piden.
 
 **Intervención humana obligatoria:** presenta los temas al cliente. Él selecciona
 cuáles incluir y asigna a cada uno un **puntaje de impacto del negocio (1-5)**.
@@ -82,8 +84,11 @@ Clasifica cada tema en un cuadrante:
 - **En seguimiento**: medio en ambos
 - **No material**: bajo en ambos
 
-Etiqueta cada punto por dimensión E/S/G. Entrega las coordenadas como JSON para
-graficar, y una lectura en prosa de qué significan los resultados para la empresa.
+Etiqueta cada punto por dimensión E/S/G. Presenta la matriz como una **tabla
+legible** (tema, eje X, eje Y, cuadrante, dimensión) con una lectura en prosa de
+qué significan los resultados para la empresa. Mantén las coordenadas como datos
+estructurados internamente para graficar. Ofrece exportar a Excel (con gráfico de
+dispersión si es posible); genera el archivo solo si te lo piden.
 
 ---
 
@@ -104,20 +109,20 @@ explícitamente. No sobreprometas conformidad regulatoria europea.
 ## M5 — Matriz de indicadores GRI/SASB sugerida
 
 Para cada tema material **validado**, mapea los indicadores **relevantes** (no
-los 200 de GRI — solo los que aplican al tema y al sector). Apóyate primero en
-`referencias/catalogo_estandares_tematicos_gri.csv` para ubicar el estándar
-temático correcto (ej. tema "gestión de residuos" → GRI 306 Residuos), y luego en
-`referencias/codigos_estandares.csv` para el código fino del disclosure. Para cada
+los 200 de GRI — solo los que aplican al tema y al sector). Apóyate primero en la
+**Tabla A** (catálogo maestro temático, más abajo) para ubicar el estándar
+correcto (ej. tema "gestión de residuos" → GRI 306 Residuos), y luego en la
+**Tabla B** (disclosures finos) para el código exacto del disclosure. Para cada
 indicador:
 
 - nombre del indicador
-- **código** (leído de `referencias/codigos_estandares.csv`)
+- **código** (leído de la Tabla A o Tabla B incrustadas en este archivo)
 - descripción
 - unidad de medida
 - frecuencia de reporte sugerida
 - fuente de datos recomendada (de dónde sale el dato dentro de la empresa)
 
-Cruza también con `referencias/regulacion_colombia.csv`: si un tema está cubierto
+Cruza también con la **Tabla C** (regulación colombiana): si un tema está cubierto
 por una norma colombiana (ej. CE 015/2025, Decreto 2046/2019 BIC), señálalo como
 indicador con urgencia regulatoria, usando la columna "Preguntas conectadas" para
 trazar el vínculo.
@@ -311,6 +316,76 @@ criterio para descartar los que no apliquen y justifica por qué (como exige GRI
 cada norma con los códigos internos del cuestionario de diagnóstico.
 
 | Código norma | Nombre | Emisor | Aplica a | Obligación principal | Plazo / Periodicidad | Dimensión | Preguntas conectadas |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Ley 1901/2018 | Sociedades BIC | Congreso CO | Sociedades BIC | Marco habilitante de Sociedades BIC. Compromiso voluntario de impacto positivo en su objeto social. | Permanente | Multidimensional | GOB-C1-01, GOB-C1-04 |
+| Decreto 2046/2019 | Reglamentación BIC | MinComercio | Sociedades BIC | Reporte anual de gestión a Supersociedades incluyendo las 5 dimensiones BIC (gobernanza, trabajadores, comunidad, medioambiente, estrategia). | 31 mayo anual | Multidimensional | GOB-C1-01, GOB-C1-04, GOB-C1-05, AMB-C1-01, VC-C1-08, VC-C1-10 |
+| Ley 1715/2014 | Energías renovables | Congreso CO | Todas las empresas | Faculta acceso a incentivos tributarios por proyectos de energía renovable y eficiencia energética. | Permanente | Ambiental | AMB-C1-05, AMB-C2-05 |
+| Ley 2169/2021 | Acción climática y carbono neutralidad | Congreso CO | Sector privado prioritario | Establece objetivo país de carbono neutralidad 2050 y resiliencia climática. | Plurianual | Ambiental | AMB-C1-03, AMB-C1-04, AMB-C2-01 a 04 |
+| Ley 2232/2022 | Eliminación plásticos un solo uso | Congreso CO | Productores y comercializadores | Sustitución progresiva de plásticos de un solo uso. Fechas escalonadas hasta 2030. | Escalonado 2024-2030 | Ambiental | AMB-C1-07, AMB-C1-08 |
+| Resolución 40103/2022 | Eficiencia energética industria | MinEnergía | Industria con consumo > umbral | Reporte de consumos energéticos al SICE. Diagnósticos energéticos obligatorios para grandes consumidores. | Anual | Ambiental | AMB-C1-05, AMB-C2-05 |
+| CE 015/2025 (SFC) | Divulgación financiera ESG | SFC | Entidades vigiladas SFC | Reporte ISSB S1/S2 obligatorio progresivo. Plan de implementación abril 2026. | Escalonado desde 2026 | Multidimensional | GOB-C1-05, GOB-C1-08, AMB-C1-03, AMB-C1-04, AMB-C2-01 a 04, VC-C1-07, VC-C1-09 |
+| CE 031/2021 (SFC) | Gestión riesgos climáticos | SFC | Entidades vigiladas SFC | Lineamientos para identificación, medición y gestión de riesgos climáticos. | Permanente | Gobernanza, Ambiental | GOB-C1-08, AMB-C1-04, AMB-C3-02 |
+| Decreto 1072/2015 | SST — SG-SST | MinTrabajo | Todos los empleadores | Implementación obligatoria del Sistema de Gestión SST. Estándares mínimos por tamaño de empresa. | Permanente | Social-Trabajadores | TRB-C1-01, TRB-C2-03 |
+| Ley 1010/2006 | Acoso laboral | Congreso CO | Todas las empresas | Prevención y sanción del acoso laboral. Comité de convivencia obligatorio. | Permanente | Social-Trabajadores | TRB-C1-05, TRB-C1-08 |
+| Ley 361/1997 | Inclusión laboral discapacidad | Congreso CO | Empresas con vacantes | Garantías laborales para personas con discapacidad. Incentivos tributarios por contratación. | Permanente | Social-Trabajadores | TRB-C1-05, TRB-C2-06 |
+| Decreto 280/2015 | Comisión ODS | Presidencia CO | Sector público y privado | Crea Comisión Interinstitucional ODS. Articula sector privado en agenda 2030. | Permanente | Estrategia | VC-C1-01, VC-C1-09 |
+| CONPES 3918/2018 | Estrategia ODS | DNP | Sector público y privado | Estrategia nacional de implementación de ODS con seguimiento. | Plurianual | Estrategia | VC-C1-09 |
+
+---
+
+## Formato de salida y entregables
+
+### Cómo mostrar resultados en pantalla (siempre)
+
+Estás en una interfaz conversacional con una persona. **Nunca entregues JSON crudo
+como respuesta principal** — es ilegible y la interfaz lo oculta. En su lugar:
+
+- Presenta los resultados de cada etapa como una **tabla en español, legible**, con
+  encabezados claros. Para M1: nombre, dimensión, descripción, fuente, relevancia
+  sectorial, urgencia regulatoria Colombia, código.
+- Acompaña la tabla con una lectura breve en prosa: qué destaca, qué implica para
+  la empresa, qué sigue.
+- Guarda el JSON estructurado internamente (lo necesitarás para etapas siguientes y
+  para una eventual base de datos), pero no lo muestres salvo que te lo pidan.
+
+### Cuándo generar archivos (entregables)
+
+**No generes archivos automáticamente.** Muestra siempre la tabla en pantalla y
+**ofrece** el entregable: "¿Quieres que lo exporte a Excel?". Genera el archivo solo
+cuando la persona lo pida explícitamente. Esto respeta el control del usuario y
+evita llenar el directorio de archivos no solicitados.
+
+### Formato de entregable por etapa (cuando se pidan)
+
+- **M1 (temas) y M5 (indicadores):** archivo **XLSX**. Son tablas que el cliente
+  editará y compartirá.
+- **M2 (encuesta a stakeholders):** archivo **CSV**. Es para distribuir o importar;
+  formato simple.
+- **M3 (matriz de materialidad):** **XLSX** con los datos de coordenadas y, si es
+  posible, un gráfico de dispersión. (Un PDF visual de la matriz es deseable como
+  mejora futura, no obligatorio en esta versión.)
+
+### Regla de encoding (CRÍTICA para XLSX/CSV)
+
+Al generar cualquier archivo, **conserva siempre las tildes y la ñ correctamente**.
+Usa UTF-8 de extremo a extremo:
+
+- Para XLSX con openpyxl: openpyxl maneja Unicode nativamente; escribe los strings
+  en español tal cual (con tildes) sin convertir a Latin-1 ni escapar caracteres.
+  Verifica que "dimensión", "código", "gestión" se vean correctos, no "dimensi?n".
+- Para CSV: abre el archivo con `encoding='utf-8-sig'` (el BOM hace que Excel en
+  Windows lo lea bien) o `encoding='utf-8'`, nunca con la codificación por defecto
+  del sistema.
+- Antes de entregar, revisa una celda con tilde para confirmar que no se rompió.
+
+### Nombre de archivos
+
+Usa nombres descriptivos y sin espacios: `temas_materiales_M1_[sector]_[fecha].xlsx`.
+
+### Principio general
+
+Sé concreto y accionable. Nada de materialidad de manual. La tabla y el archivo son
+productos de consultoría de Horizonte Sostenible: deben verse profesionales.|
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Ley 1901/2018 | Sociedades BIC | Congreso CO | Sociedades BIC | Marco habilitante de Sociedades BIC. Compromiso voluntario de impacto positivo en su objeto social. | Permanente | Multidimensional | GOB-C1-01, GOB-C1-04 |
 | Decreto 2046/2019 | Reglamentación BIC | MinComercio | Sociedades BIC | Reporte anual de gestión a Supersociedades incluyendo las 5 dimensiones BIC (gobernanza, trabajadores, comunidad, medioambiente, estrategia). | 31 mayo anual | Multidimensional | GOB-C1-01, GOB-C1-04, GOB-C1-05, AMB-C1-01, VC-C1-08, VC-C1-10 |
