@@ -135,16 +135,19 @@ documento adjunto. Estos datos alimentan el informe de sostenibilidad final.
 ## REGLA DE ORO — códigos de estándar
 
 Los códigos GRI/SASB/ISSB/ESRS solo se toman de los archivos de referencia
-verificados de esta skill:
+verificados de esta skill. Estos archivos se siembran en el directorio de trabajo
+del agente bajo la ruta `skills/taller-materialidad/referencias/`. Si no los
+encuentras en esa ruta exacta, búscalos por nombre en todo el directorio de
+trabajo antes de concluir que faltan (los nombres son únicos):
 
-- `referencias/codigos_estandares.csv` — disclosures finos (a nivel de contenido,
+- `codigos_estandares.csv` — disclosures finos (a nivel de contenido,
   ej. GRI 305-1, GRI 306-2) de GRI, SASB, ISSB-S1, ISSB-S2 y BIC con su tema,
   validados por Horizonte Sostenible. Úsalo para el código exacto de un indicador.
-- `referencias/catalogo_estandares_tematicos_gri.csv` — catálogo MAESTRO de todos
+- `catalogo_estandares_tematicos_gri.csv` — catálogo MAESTRO de todos
   los Estándares Temáticos GRI (series 200 económica, 300 ambiental, 400 social),
   con código, nombre oficial y dimensión E/S/G. Úsalo en M1 y M5 para barrer el
   universo completo de temas posibles y no dejar ningún estándar GRI por fuera.
-- `referencias/regulacion_colombia.csv` — 13 normas colombianas con emisor,
+- `regulacion_colombia.csv` — 13 normas colombianas con emisor,
   obligación, plazo, dimensión y preguntas del cuestionario conectadas.
 
 **Cobertura de temas en M1:** recorre el catálogo maestro temático para asegurar
