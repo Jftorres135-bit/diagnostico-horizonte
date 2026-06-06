@@ -385,28 +385,4 @@ Usa nombres descriptivos y sin espacios: `temas_materiales_M1_[sector]_[fecha].x
 ### Principio general
 
 Sé concreto y accionable. Nada de materialidad de manual. La tabla y el archivo son
-productos de consultoría de Horizonte Sostenible: deben verse profesionales.|
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Ley 1901/2018 | Sociedades BIC | Congreso CO | Sociedades BIC | Marco habilitante de Sociedades BIC. Compromiso voluntario de impacto positivo en su objeto social. | Permanente | Multidimensional | GOB-C1-01, GOB-C1-04 |
-| Decreto 2046/2019 | Reglamentación BIC | MinComercio | Sociedades BIC | Reporte anual de gestión a Supersociedades incluyendo las 5 dimensiones BIC (gobernanza, trabajadores, comunidad, medioambiente, estrategia). | 31 mayo anual | Multidimensional | GOB-C1-01, GOB-C1-04, GOB-C1-05, AMB-C1-01, VC-C1-08, VC-C1-10 |
-| Ley 1715/2014 | Energías renovables | Congreso CO | Todas las empresas | Faculta acceso a incentivos tributarios por proyectos de energía renovable y eficiencia energética. | Permanente | Ambiental | AMB-C1-05, AMB-C2-05 |
-| Ley 2169/2021 | Acción climática y carbono neutralidad | Congreso CO | Sector privado prioritario | Establece objetivo país de carbono neutralidad 2050 y resiliencia climática. | Plurianual | Ambiental | AMB-C1-03, AMB-C1-04, AMB-C2-01 a 04 |
-| Ley 2232/2022 | Eliminación plásticos un solo uso | Congreso CO | Productores y comercializadores | Sustitución progresiva de plásticos de un solo uso. Fechas escalonadas hasta 2030. | Escalonado 2024-2030 | Ambiental | AMB-C1-07, AMB-C1-08 |
-| Resolución 40103/2022 | Eficiencia energética industria | MinEnergía | Industria con consumo > umbral | Reporte de consumos energéticos al SICE. Diagnósticos energéticos obligatorios para grandes consumidores. | Anual | Ambiental | AMB-C1-05, AMB-C2-05 |
-| CE 015/2025 (SFC) | Divulgación financiera ESG | SFC | Entidades vigiladas SFC | Reporte ISSB S1/S2 obligatorio progresivo. Plan de implementación abril 2026. | Escalonado desde 2026 | Multidimensional | GOB-C1-05, GOB-C1-08, AMB-C1-03, AMB-C1-04, AMB-C2-01 a 04, VC-C1-07, VC-C1-09 |
-| CE 031/2021 (SFC) | Gestión riesgos climáticos | SFC | Entidades vigiladas SFC | Lineamientos para identificación, medición y gestión de riesgos climáticos. | Permanente | Gobernanza, Ambiental | GOB-C1-08, AMB-C1-04, AMB-C3-02 |
-| Decreto 1072/2015 | SST — SG-SST | MinTrabajo | Todos los empleadores | Implementación obligatoria del Sistema de Gestión SST. Estándares mínimos por tamaño de empresa. | Permanente | Social-Trabajadores | TRB-C1-01, TRB-C2-03 |
-| Ley 1010/2006 | Acoso laboral | Congreso CO | Todas las empresas | Prevención y sanción del acoso laboral. Comité de convivencia obligatorio. | Permanente | Social-Trabajadores | TRB-C1-05, TRB-C1-08 |
-| Ley 361/1997 | Inclusión laboral discapacidad | Congreso CO | Empresas con vacantes | Garantías laborales para personas con discapacidad. Incentivos tributarios por contratación. | Permanente | Social-Trabajadores | TRB-C1-05, TRB-C2-06 |
-| Decreto 280/2015 | Comisión ODS | Presidencia CO | Sector público y privado | Crea Comisión Interinstitucional ODS. Articula sector privado en agenda 2030. | Permanente | Estrategia | VC-C1-01, VC-C1-09 |
-| CONPES 3918/2018 | Estrategia ODS | DNP | Sector público y privado | Estrategia nacional de implementación de ODS con seguimiento. | Plurianual | Estrategia | VC-C1-09 |
-
----
-
-## Formato de salida
-
-- Datos para guardar/graficar (temas, coordenadas, indicadores) → **JSON válido**,
-  sin markdown alrededor.
-- Explicaciones para el cliente → prosa clara, adaptada a si es consultor o cliente
-  final (ver CLAUDE.md).
-- Sé concreto y accionable. Nada de materialidad de manual.
+productos de consultoría de Horizonte Sostenible: deben verse profesionales.
