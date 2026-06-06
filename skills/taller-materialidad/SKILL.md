@@ -167,3 +167,4 @@ confirmar" honesto.
 - Explicaciones para el cliente → prosa clara, adaptada a si es consultor o cliente
   final (ver CLAUDE.md).
 - Sé concreto y accionable. Nada de materialidad de manual.
+
