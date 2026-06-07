@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller de Materialidad — Horizonte Sostenible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --verde:        #143C24;
+  --verde-oscuro: #0C2A18;
+  --verde-vivo:   #2C8B4F;
+  --terra:        #C75B33;
+  --terra-light:  #F0D5C8;
+  --dorado:       #D8A33A;
+  --dorado-suave: #F1D27A;
+  --crema:        #F4F1E7;
+  --crema-dark:   #EAE6D8;
+  --ink:          #101813;
+  --ink-60:       rgba(16,24,19,0.6);
+  --ink-25:       rgba(16,24,19,0.25);
+  --ink-10:       rgba(16,24,19,0.10);
+  --white:        #FFFFFF;
+  --display:      'Bricolage Grotesque', Georgia, serif;
+  --body:         'Hanken Grotesk', system-ui, sans-serif;
+}
+
+html { font-size: 16px; }
+body {
+  font-family: var(--body);
+  background: var(--crema);
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOPBAR ─────────────────────────────────────── */
+.topbar {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--verde-oscuro);
+  height: 60px;
+  display: flex; align-items: center;
+  padding: 0 2rem;
+  gap: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.topbar-brand {
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.topbar-mark {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--dorado);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display);
+  font-weight: 800; font-size: 13px;
+  color: var(--verde-oscuro);
+  letter-spacing: -0.02em;
+}
+.topbar-wordmark {
+  font-family: var(--display);
+  font-weight: 700; font-size: 15px;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+.topbar-sep {
+  width: 1px; height: 22px;
+  background: rgba(255,255,255,0.15);
+}
+.topbar-context {
+  font-family: var(--body);
+  font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,0.5);
+}
+.topbar-context strong {
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
+.topbar-right {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 10px;
+}
+.save-pill {
+  font-size: 11px; font-weight: 600;
+  padding: 4px 12px; border-radius: 20px;
+  letter-spacing: 0.03em;
+  transition: all 0.3s;
+}
+.save-pill.ok   { background: rgba(44,139,79,0.25);  color: #7FD4A0; }
+.save-pill.wait { background: rgba(216,163,58,0.25); color: var(--dorado-suave); }
+.save-pill.err  { background: rgba(199,91,51,0.25);  color: #F0A080; }
+
+/* ── PANTALLA INICIO ─────────────────────────────── */
+#screen-inicio {
+  display: flex; align-items: center; justify-content: center;
+  min-height: calc(100vh - 60px);
+  padding: 2rem;
+}
+.inicio-wrap {
+  width: 100%; max-width: 540px;
+}
+.inicio-eyebrow {
+  font-family: var(--body);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 0.75rem;
+}
+.inicio-titulo {
+  font-family: var(--display);
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--verde);
+  margin-bottom: 1rem;
+}
+.inicio-titulo span { color: var(--terra); }
+.inicio-desc {
+  font-size: 15px; line-height: 1.65;
+  color: var(--ink-60);
+  margin-bottom: 2rem;
+}
+.inicio-card {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--ink-10);
+  padding: 2rem;
+  margin-bottom: 1.25rem;
+}
+.pasos { display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 2rem; }
+.paso { display: flex; gap: 14px; align-items: flex-start; }
+.paso-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--verde); color: var(--white);
+  font-family: var(--display);
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.paso-text { font-size: 13px; line-height: 1.6; color: var(--ink-60); }
+.paso-text strong { color: var(--ink); font-weight: 600; }
+.btn-abrir {
+  width: 100%; padding: 14px;
+  background: var(--verde);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 0.01em;
+  border: none; border-radius: 10px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-abrir:hover { background: var(--verde-vivo); }
+.btn-abrir:active { transform: scale(0.98); }
+.btn-demo {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--ink-25);
+  border-radius: 10px;
+  font-family: var(--body);
+  font-size: 13px; font-weight: 600;
+  color: var(--ink-60);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-demo:hover { border-color: var(--verde); color: var(--verde); }
+.inicio-error {
+  font-size: 12px; color: var(--terra);
+  background: #FDF2EE; border-radius: 8px;
+  padding: 10px 14px; margin-top: 1rem;
+  display: none; line-height: 1.5;
+}
+
+/* ── PANTALLA TALLER ─────────────────────────────── */
+#screen-taller { display: none; }
+.main { max-width: 1140px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+
+/* STATS */
+.stats-row {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 10px; margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--ink-10);
+  padding: 1.1rem 1.25rem;
+  position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.stat-card.s-total::before  { background: var(--ink-25); }
+.stat-card.s-sel::before    { background: var(--verde-vivo); }
+.stat-card.s-elim::before   { background: var(--terra); }
+.stat-card.s-pond::before   { background: var(--dorado); }
+.stat-card.s-prom::before   { background: var(--verde); }
+.stat-val {
+  font-family: var(--display);
+  font-size: 32px; font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.stat-val.c-verde { color: var(--verde-vivo); }
+.stat-val.c-terra { color: var(--terra); }
+.stat-val.c-dorado { color: var(--dorado); }
+.stat-val.c-ink   { color: var(--verde); }
+.stat-lbl {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+/* BARRA CONTROLES */
+.controls {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.filtro-lbl {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-60); margin-right: 4px;
+}
+.filtro-btn {
+  padding: 6px 16px; border-radius: 20px;
+  font-family: var(--body);
+  font-size: 12px; font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--ink-25);
+  background: var(--white); color: var(--ink-60);
+  transition: all 0.15s;
+}
+.filtro-btn:hover { border-color: var(--verde); color: var(--verde); }
+.filtro-btn.on { background: var(--verde); color: var(--white); border-color: var(--verde); }
+.filtro-btn.on-e { background: var(--verde-vivo); color: var(--white); border-color: var(--verde-vivo); }
+.filtro-btn.on-s { background: #1A4E7A; color: var(--white); border-color: #1A4E7A; }
+.filtro-btn.on-g { background: var(--dorado); color: var(--ink); border-color: var(--dorado); }
+.filtro-btn.on-sp { background: var(--terra); color: var(--white); border-color: var(--terra); }
+.controls-right { margin-left: auto; }
+.btn-save {
+  padding: 7px 18px; border-radius: 8px;
+  font-family: var(--body); font-size: 12px; font-weight: 700;
+  background: var(--verde); color: var(--white);
+  border: none; cursor: pointer;
+  transition: background 0.15s;
+  letter-spacing: 0.02em;
+}
+.btn-save:hover { background: var(--verde-vivo); }
+
+/* GRID TEMAS */
+.temas-grid { display: flex; flex-direction: column; gap: 8px; }
+
+.tema-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--ink-10);
+  padding: 1.1rem 1.25rem;
+  display: flex; align-items: center; gap: 16px;
+  transition: opacity 0.25s, border-color 0.2s;
+  animation: fadeIn 0.25s ease both;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.tema-card.ponderado {
+  border-left: 3px solid var(--verde-vivo);
+}
+.tema-card.off {
+  opacity: 0.35; border-style: dashed;
+}
+
+.tema-check {
+  width: 20px; height: 20px;
+  flex-shrink: 0; cursor: pointer;
+  accent-color: var(--verde-vivo);
+}
+
+.tema-body { flex: 1; min-width: 0; }
+.tema-top {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 5px; flex-wrap: wrap;
+}
+.tema-nombre {
+  font-family: var(--display);
+  font-size: 14px; font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.dim-tag {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 20px;
+  flex-shrink: 0;
+}
+.dim-E { background: #D6EFD9; color: #1A5E2A; }
+.dim-S { background: #D6E8F7; color: #0D3E6B; }
+.dim-G { background: #F7EDD2; color: #7A5200; }
+
+.tema-desc {
+  font-size: 12px; line-height: 1.6;
+  color: var(--ink-60);
+  margin-bottom: 7px;
+}
+.tema-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  font-size: 10px; font-weight: 600;
+  color: var(--ink-60);
+  background: var(--crema);
+  border: 1px solid var(--crema-dark);
+  padding: 2px 8px; border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* SCORING */
+.scoring {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+  flex-shrink: 0;
+}
+.scoring-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-60); text-align: center;
+  line-height: 1.3;
+}
+.score-btns { display: flex; gap: 5px; }
+.score-btn {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--ink-25);
+  background: var(--crema);
+  font-family: var(--display);
+  font-size: 14px; font-weight: 700;
+  color: var(--ink-60);
+  cursor: pointer;
+  transition: all 0.12s;
+  display: flex; align-items: center; justify-content: center;
+}
+.score-btn:hover:not(:disabled) {
+  border-color: var(--verde-vivo);
+  color: var(--verde-vivo);
+  background: #EBF7EF;
+}
+.score-btn.on {
+  background: var(--verde);
+  border-color: var(--verde);
+  color: var(--white);
+}
+.score-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.score-readout {
+  font-family: var(--display);
+  font-size: 22px; font-weight: 800;
+  color: var(--verde);
+  letter-spacing: -0.03em;
+  min-width: 28px; text-align: center;
+  line-height: 1;
+}
+.score-readout.na {
+  font-size: 14px; font-weight: 500;
+  color: var(--ink-25);
+  font-family: var(--body);
+}
+
+/* PREVIEW EJE Y */
+.preview-section {
+  margin-top: 2rem;
+}
+.preview-header {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 1.25rem;
+}
+.preview-titulo {
+  font-family: var(--display);
+  font-size: 18px; font-weight: 800;
+  letter-spacing: -0.02em; color: var(--verde);
+}
+.preview-sub {
+  font-size: 12px; color: var(--ink-60);
+}
+.preview-grid { display: flex; flex-direction: column; gap: 6px; }
+.preview-row {
+  display: grid;
+  grid-template-columns: 22px 1fr auto 140px 28px;
+  align-items: center; gap: 10px;
+  background: var(--white);
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--ink-10);
+  font-size: 12px;
+}
+.prev-idx {
+  font-family: var(--display);
+  font-size: 11px; font-weight: 700;
+  color: var(--ink-25); text-align: right;
+}
+.prev-nombre {
+  font-weight: 600; color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.prev-dim { flex-shrink: 0; }
+.prev-bar-bg {
+  height: 6px; background: var(--crema-dark);
+  border-radius: 3px; overflow: hidden;
+}
+.prev-bar-fill {
+  height: 6px; border-radius: 3px;
+  background: var(--verde-vivo);
+  transition: width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.prev-score {
+  font-family: var(--display);
+  font-size: 16px; font-weight: 800;
+  color: var(--verde); text-align: right;
+}
+
+/* EMPTY */
+.empty-state {
+  padding: 5rem 2rem; text-align: center;
+  color: var(--ink-60); font-size: 14px; line-height: 2;
+}
+.empty-icon {
+  font-size: 40px; margin-bottom: 1rem; opacity: 0.3;
+  display: block;
+}
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--verde-oscuro); color: var(--white);
+  font-family: var(--body); font-size: 13px; font-weight: 600;
+  padding: 10px 22px; border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  opacity: 0; transition: all 0.25s; pointer-events: none;
+  z-index: 300;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ANIMACIÓN ENTRADA TARJETAS */
+.temas-grid .tema-card:nth-child(1)  { animation-delay: 0.03s; }
+.temas-grid .tema-card:nth-child(2)  { animation-delay: 0.06s; }
+.temas-grid .tema-card:nth-child(3)  { animation-delay: 0.09s; }
+.temas-grid .tema-card:nth-child(4)  { animation-delay: 0.12s; }
+.temas-grid .tema-card:nth-child(5)  { animation-delay: 0.15s; }
+.temas-grid .tema-card:nth-child(6)  { animation-delay: 0.18s; }
+.temas-grid .tema-card:nth-child(7)  { animation-delay: 0.21s; }
+.temas-grid .tema-card:nth-child(8)  { animation-delay: 0.24s; }
+.temas-grid .tema-card:nth-child(n+9){ animation-delay: 0.27s; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-mark">HS</div>
+    <div class="topbar-wordmark">Horizonte Sostenible</div>
+  </div>
+  <div class="topbar-sep"></div>
+  <div class="topbar-context">Taller de Materialidad &nbsp;·&nbsp; <strong id="ctx-cliente">—</strong></div>
+  <div class="topbar-right" id="topbar-right" style="display:none;">
+    <div class="save-pill ok" id="save-pill">✓ Guardado</div>
+  </div>
+</div>
+
+<!-- PANTALLA INICIO -->
+<div id="screen-inicio">
+  <div class="inicio-wrap">
+    <div class="inicio-eyebrow">Análisis de Materialidad ESG · M1</div>
+    <h1 class="inicio-titulo">Ponderación de<br>temas <span>candidatos</span></h1>
+    <p class="inicio-desc">
+      Interfaz de trabajo para el momento de intervención humana del taller.
+      Selecciona, descarta y asigna puntaje de impacto a cada tema candidato.
+      Los cambios se guardan directamente en el archivo Excel.
+    </p>
+    <div class="inicio-card">
+      <div class="pasos">
+        <div class="paso">
+          <div class="paso-num">1</div>
+          <div class="paso-text">Haz clic en <strong>Abrir archivo Excel</strong> y selecciona el archivo <code>materialidad_[cliente]_temas.xlsx</code> generado por el agente.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">2</div>
+          <div class="paso-text">Acepta el permiso de acceso al archivo. Solo se solicita una vez por sesión. Usa <strong>Chrome o Edge</strong> — Firefox no soporta esta función.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">3</div>
+          <div class="paso-text">Activa o desactiva temas con el checkbox y asigna un <strong>puntaje de impacto del negocio (1–5)</strong>. Los cambios se guardan automáticamente.</div>
+        </div>
+      </div>
+      <button class="btn-abrir" onclick="abrirArchivo()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        Abrir archivo Excel del taller
+      </button>
+      <div style="margin-top:10px;">
+        <button class="btn-demo" onclick="cargarDemo()">Ver demo con datos de ejemplo →</button>
+      </div>
+      <div class="inicio-error" id="inicio-error"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PANTALLA TALLER -->
+<div id="screen-taller">
+  <div class="main">
+
+    <div class="stats-row">
+      <div class="stat-card s-total">
+        <div class="stat-val c-ink" id="st-total">0</div>
+        <div class="stat-lbl">Candidatos</div>
+      </div>
+      <div class="stat-card s-sel">
+        <div class="stat-val c-verde" id="st-sel">0</div>
+        <div class="stat-lbl">Seleccionados</div>
+      </div>
+      <div class="stat-card s-elim">
+        <div class="stat-val c-terra" id="st-elim">0</div>
+        <div class="stat-lbl">Eliminados</div>
+      </div>
+      <div class="stat-card s-pond">
+        <div class="stat-val c-dorado" id="st-pond">0</div>
+        <div class="stat-lbl">Ponderados</div>
+      </div>
+      <div class="stat-card s-prom">
+        <div class="stat-val c-ink" id="st-prom">—</div>
+        <div class="stat-lbl">Puntaje promedio</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <span class="filtro-lbl">Filtrar</span>
+      <button class="filtro-btn on" data-f="todos" onclick="setFiltro('todos',this)">Todos</button>
+      <button class="filtro-btn" data-f="E" onclick="setFiltro('E',this)">Ambiental</button>
+      <button class="filtro-btn" data-f="S" onclick="setFiltro('S',this)">Social</button>
+      <button class="filtro-btn" data-f="G" onclick="setFiltro('G',this)">Gobernanza</button>
+      <button class="filtro-btn" data-f="sinpuntaje" onclick="setFiltro('sinpuntaje',this)">Sin puntaje</button>
+      <div class="controls-right">
+        <button class="btn-save" onclick="guardarManual()">Guardar ahora</button>
+      </div>
+    </div>
+
+    <div class="temas-grid" id="temas-grid"></div>
+
+    <div class="preview-section" id="preview-section" style="display:none;">
+      <div class="preview-header">
+        <div class="preview-titulo">Eje Y — Impacto del negocio</div>
+        <div class="preview-sub">Temas seleccionados · ordenados por puntaje</div>
+      </div>
+      <div class="preview-grid" id="preview-grid"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const DEMO_TEMAS = [
+  {nombre:"Gestión de residuos sólidos",dimension:"E",descripcion:"Operación principal: recolección, transporte y disposición en 389+ municipios. Riesgo operacional y regulatorio central.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 306"},
+  {nombre:"Emisiones GHG y calidad del aire",dimension:"E",descripcion:"Flota de vehículos de recolección genera emisiones directas relevantes para reguladores ambientales.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 305"},
+  {nombre:"Uso de energía y eficiencia",dimension:"E",descripcion:"Consumo de combustible y energía eléctrica en Parques Ecológicos y Tecnológicos.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 302"},
+  {nombre:"Gestión de agua y vertimientos",dimension:"E",descripcion:"Lixiviados y aguas residuales de los Parques Ecológicos con riesgo de contaminación de acuíferos.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 303"},
+  {nombre:"Biodiversidad y uso del suelo",dimension:"E",descripcion:"Impacto de infraestructura de disposición sobre ecosistemas locales y áreas protegidas.",fuente:"GRI 2021",relevancia_sectorial:"Media",codigo_estandar:"GRI 304"},
+  {nombre:"Economía circular y reciclaje",dimension:"E",descripcion:"Recuperación de materiales y valorización de residuos en parques tecnológicos; oportunidad estratégica.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 301"},
+  {nombre:"Salud y seguridad laboral",dimension:"S",descripcion:"Alta accidentalidad en operarios de recolección. Normativa SG-SST colombiana de obligatorio cumplimiento.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 403"},
+  {nombre:"Relaciones con comunidades",dimension:"S",descripcion:"Operaciones en 389 municipios: percepción ciudadana, conflictos de uso del suelo, licencia social.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 413"},
+  {nombre:"Empleo y condiciones laborales",dimension:"S",descripcion:"Miles de empleados directos en operaciones de campo; condiciones de contratación y rotación.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 401"},
+  {nombre:"Formación y desarrollo",dimension:"S",descripcion:"Capacitación técnica y en seguridad para operarios y personal administrativo.",fuente:"GRI 2021",relevancia_sectorial:"Media",codigo_estandar:"GRI 404"},
+  {nombre:"Diversidad e inclusión",dimension:"S",descripcion:"Representación de género y grupos vulnerables en plantilla; brechas salariales.",fuente:"GRI 2021",relevancia_sectorial:"Media",codigo_estandar:"GRI 405"},
+  {nombre:"Derechos humanos en operaciones",dimension:"S",descripcion:"Presencia en territorios con comunidades étnicas, campesinas y zonas históricamente afectadas.",fuente:"GRI 2021",relevancia_sectorial:"Media",codigo_estandar:"GRI 412"},
+  {nombre:"Impacto económico local",dimension:"S",descripcion:"Generación de empleo y compras locales en municipios de operación.",fuente:"GRI 2021",relevancia_sectorial:"Media",codigo_estandar:"GRI 201"},
+  {nombre:"Anticorrupción y ética",dimension:"G",descripcion:"Contratos públicos con 389 municipios: riesgo de corrupción, colusión y conflictos de interés.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 205"},
+  {nombre:"Gobierno corporativo",dimension:"G",descripcion:"Estructura de control, composición de junta y políticas de buen gobierno corporativo.",fuente:"GRI 2021",relevancia_sectorial:"Alta",codigo_estandar:"GRI 2-9"},
+  {nombre:"Cumplimiento regulatorio",dimension:"G",descripcion:"Licencias ambientales, PGIRS municipales, regulación de servicios públicos domiciliarios (SSPD).",fuente:"Regulación colombiana",relevancia_sectorial:"Alta",codigo_estandar:"GRI 2-27"},
+  {nombre:"Transparencia e información",dimension:"G",descripcion:"Reporte a entes de control y comunicación con comunidades sobre operaciones y desempeño.",fuente:"GRI 2021",relevancia_sectorial:"Media",codigo_estandar:"GRI 2-3"},
+  {nombre:"Gestión de proveedores",dimension:"G",descripcion:"Cadena de valor local: subcontratistas de transporte, mantenimiento y gestión de residuos especiales.",fuente:"GRI 2021",relevancia_sectorial:"Media",codigo_estandar:"GRI 2-6"},
+];
+
+const DIM_LABEL = { E: 'Ambiental', S: 'Social', G: 'Gobernanza' };
+const FILTRO_CLASS = { E: 'on-e', S: 'on-s', G: 'on-g', sinpuntaje: 'on-sp', todos: 'on' };
+
+let fileHandle = null;
+let workbook = null;
+let temas = [];
+let filtro = 'todos';
+let saveTimer = null;
+let dirty = false;
+
+function cargarDemo() {
+  temas = DEMO_TEMAS.map((t, i) => ({ ...t, id: i, activo: true, puntaje: 0 }));
+  document.getElementById('ctx-cliente').textContent = 'Urbaser Colombia · Demo';
+  entrarTaller();
+}
+
+async function abrirArchivo() {
+  const errEl = document.getElementById('inicio-error');
+  errEl.style.display = 'none';
+  try {
+    if (!window.showOpenFilePicker) throw new Error('Usa Chrome o Edge — Firefox no soporta esta función.');
+    [fileHandle] = await window.showOpenFilePicker({
+      types: [{ description: 'Excel', accept: { 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'] } }]
+    });
+    const file = await fileHandle.getFile();
+    const ab = await file.arrayBuffer();
+    workbook = XLSX.read(ab, { type: 'array' });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+    temas = rows.map((r, i) => ({
+      id: i,
+      nombre: r['nombre'] || r['Tema'] || '',
+      dimension: (r['dimension'] || r['Dimensión'] || 'G').toString().toUpperCase().trim(),
+      descripcion: r['descripcion'] || r['Descripción'] || '',
+      fuente: r['fuente'] || r['Fuente'] || '',
+      relevancia_sectorial: r['relevancia_sectorial'] || r['Relevancia sectorial'] || '',
+      codigo_estandar: r['codigo_estandar'] || r['Código estándar'] || '',
+      puntaje: parseInt(r['puntaje'] || 0) || 0,
+      activo: r['activo'] !== undefined
+        ? ['true','1','TRUE',true,1].includes(r['activo'])
+        : true
+    })).filter(t => t.nombre);
+    if (workbook.SheetNames.includes('Metadatos')) {
+      const meta = XLSX.utils.sheet_to_json(workbook.Sheets['Metadatos'], { header: 1 });
+      const cl = meta.find(r => r[0] === 'Cliente');
+      if (cl) document.getElementById('ctx-cliente').textContent = cl[1];
+    }
+    entrarTaller();
+  } catch(e) {
+    if (e.name !== 'AbortError') {
+      errEl.textContent = 'Error: ' + e.message;
+      errEl.style.display = 'block';
+    }
+  }
+}
+
+function entrarTaller() {
+  document.getElementById('screen-inicio').style.display = 'none';
+  document.getElementById('screen-taller').style.display = 'block';
+  document.getElementById('topbar-right').style.display = 'flex';
+  render(); updateStats(); renderPreview();
+}
+
+async function guardarExcel() {
+  if (!fileHandle || !workbook) return;
+  setSavePill('wait');
+  try {
+    const wsData = [
+      ['nombre','dimension','descripcion','fuente','relevancia_sectorial','codigo_estandar','puntaje','activo'],
+      ...temas.map(t => [t.nombre, t.dimension, t.descripcion, t.fuente, t.relevancia_sectorial, t.codigo_estandar, t.puntaje, t.activo])
+    ];
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    ws['!cols'] = [{wch:32},{wch:10},{wch:55},{wch:18},{wch:18},{wch:18},{wch:8},{wch:8}];
+    const idx = workbook.SheetNames.indexOf('Temas');
+    if (idx >= 0) workbook.SheetNames.splice(idx, 1);
+    workbook.SheetNames.unshift('Temas');
+    workbook.Sheets['Temas'] = ws;
+    const out = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const wr = await fileHandle.createWritable();
+    await wr.write(out); await wr.close();
+    setSavePill('ok'); dirty = false;
+  } catch(e) {
+    setSavePill('err'); toast('Error al guardar: ' + e.message);
+  }
+}
+
+function scheduleGuardar() {
+  dirty = true; setSavePill('wait');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(guardarExcel, 1200);
+}
+function guardarManual() { clearTimeout(saveTimer); guardarExcel(); }
+
+function setSavePill(s) {
+  const p = document.getElementById('save-pill');
+  p.className = 'save-pill ' + s;
+  p.textContent = s === 'ok' ? '✓ Guardado' : s === 'wait' ? '⏳ Guardando…' : '⚠ Error';
+}
+
+function setFiltro(f, btn) {
+  filtro = f;
+  document.querySelectorAll('.filtro-btn').forEach(b => {
+    b.className = 'filtro-btn' + (b === btn ? ' ' + (FILTRO_CLASS[f] || 'on') : '');
+  });
+  render();
+}
+
+function temasVisibles() {
+  if (filtro === 'todos') return temas;
+  if (filtro === 'sinpuntaje') return temas.filter(t => t.activo && t.puntaje === 0);
+  return temas.filter(t => t.dimension === filtro);
+}
+
+function render() {
+  const g = document.getElementById('temas-grid');
+  const vis = temasVisibles();
+  if (!temas.length) {
+    g.innerHTML = '<div class="empty-state"><span class="empty-icon">📋</span>Carga el archivo Excel del agente o usa el demo para comenzar.</div>';
+    return;
+  }
+  if (!vis.length) {
+    g.innerHTML = '<div class="empty-state"><span class="empty-icon">🔍</span>Ningún tema coincide con el filtro activo.</div>';
+    return;
+  }
+  g.innerHTML = vis.map(tarjetaHTML).join('');
+}
+
+function tarjetaHTML(t) {
+  const off = !t.activo;
+  const pond = t.activo && t.puntaje > 0;
+  const cls = off ? 'off' : pond ? 'ponderado' : '';
+  const starsHTML = [1,2,3,4,5].map(n =>
+    `<button class="score-btn ${t.puntaje >= n ? 'on' : ''}" onclick="setPuntaje(${t.id},${n})"${off?' disabled':''} title="Puntaje ${n}">${n}</button>`
+  ).join('');
+  return `
+<div class="tema-card ${cls}" id="tc-${t.id}">
+  <input type="checkbox" class="tema-check" ${t.activo ? 'checked' : ''} onchange="toggleActivo(${t.id},this.checked)" title="Incluir en análisis">
+  <div class="tema-body">
+    <div class="tema-top">
+      <span class="tema-nombre">${t.nombre}</span>
+      <span class="dim-tag dim-${t.dimension}">${DIM_LABEL[t.dimension] || t.dimension}</span>
+    </div>
+    <div class="tema-desc">${t.descripcion}</div>
+    <div class="tema-chips">
+      <span class="chip">${t.fuente}</span>
+      <span class="chip">Relevancia ${t.relevancia_sectorial}</span>
+      <span class="chip">${t.codigo_estandar}</span>
+    </div>
+  </div>
+  <div class="scoring">
+    <div class="scoring-label">Impacto<br>del negocio</div>
+    <div class="score-btns">${starsHTML}</div>
+    <div class="score-readout ${t.puntaje ? '' : 'na'}" id="sr-${t.id}">${t.puntaje || '—'}</div>
+  </div>
+</div>`;
+}
+
+function toggleActivo(id, checked) {
+  temas[id].activo = checked;
+  if (!checked) temas[id].puntaje = 0;
+  updateCard(id); updateStats(); renderPreview();
+  if (fileHandle) scheduleGuardar();
+}
+
+function setPuntaje(id, val) {
+  if (!temas[id].activo) return;
+  temas[id].puntaje = temas[id].puntaje === val ? 0 : val;
+  updateCard(id); updateStats(); renderPreview();
+  if (fileHandle) scheduleGuardar();
+}
+
+function updateCard(id) {
+  const t = temas[id];
+  const card = document.getElementById('tc-' + id);
+  if (!card) return;
+  card.className = 'tema-card ' + (!t.activo ? 'off' : t.puntaje > 0 ? 'ponderado' : '');
+  card.querySelectorAll('.score-btn').forEach((b, i) => {
+    b.classList.toggle('on', t.puntaje >= i + 1);
+    b.disabled = !t.activo;
+  });
+  const sr = document.getElementById('sr-' + id);
+  if (sr) {
+    sr.className = 'score-readout' + (t.puntaje ? '' : ' na');
+    sr.textContent = t.puntaje || '—';
+  }
+}
+
+function updateStats() {
+  const total = temas.length;
+  const sel = temas.filter(t => t.activo).length;
+  const pond = temas.filter(t => t.activo && t.puntaje > 0).length;
+  const pts = temas.filter(t => t.activo && t.puntaje > 0).map(t => t.puntaje);
+  const prom = pts.length ? (pts.reduce((a, b) => a + b, 0) / pts.length).toFixed(1) : '—';
+  document.getElementById('st-total').textContent = total;
+  document.getElementById('st-sel').textContent = sel;
+  document.getElementById('st-elim').textContent = total - sel;
+  document.getElementById('st-pond').textContent = pond;
+  document.getElementById('st-prom').textContent = prom;
+}
+
+function renderPreview() {
+  const sec = document.getElementById('preview-section');
+  const grid = document.getElementById('preview-grid');
+  const con = temas.filter(t => t.activo && t.puntaje > 0).sort((a, b) => b.puntaje - a.puntaje);
+  if (!con.length) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  grid.innerHTML = con.map((t, i) => `
+<div class="preview-row">
+  <span class="prev-idx">${i + 1}</span>
+  <span class="prev-nombre">${t.nombre}</span>
+  <span class="prev-dim"><span class="dim-tag dim-${t.dimension}" style="font-size:9px;">${DIM_LABEL[t.dimension]}</span></span>
+  <div class="prev-bar-bg"><div class="prev-bar-fill" style="width:${t.puntaje * 20}%"></div></div>
+  <span class="prev-score">${t.puntaje}</span>
+</div>`).join('');
+}
+
+function toast(msg, ms = 2500) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), ms);
+}
+
+window.addEventListener('beforeunload', e => {
+  if (dirty) { e.preventDefault(); e.returnValue = ''; }
+});
+</script>
+</body>
+</html>
