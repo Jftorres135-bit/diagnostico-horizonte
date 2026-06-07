@@ -50,11 +50,34 @@ Genera un universo de **25-30 temas candidatos**. Para cada tema:
 **Presenta los temas en pantalla como una tabla legible en español** (ver sección
 "Formato de salida y entregables" al final). Mantén internamente la estructura de
 datos (JSON) para las etapas siguientes, pero no la muestres como respuesta
-principal. Ofrece exportar a Excel; genera el archivo solo si te lo piden.
+principal.
 
-**Intervención humana obligatoria:** presenta los temas al cliente. Él selecciona
-cuáles incluir y asigna a cada uno un **puntaje de impacto del negocio (1-5)**.
-Luego cruzas ese puntaje con pesos sectoriales para obtener el eje Y de la matriz.
+**Entregables obligatorios al finalizar M1 — genera SIEMPRE los dos archivos
+siguientes, sin esperar a que te los pidan:**
+
+1. **`materialidad_[cliente]_temas.xlsx`** — Excel con los temas candidatos.
+   Columnas exactas (en este orden):
+   `nombre | dimension | descripcion | fuente | relevancia_sectorial | codigo_estandar | puntaje | activo`
+   - `puntaje`: dejar en 0 para todos (se llenará en el taller)
+   - `activo`: dejar en TRUE para todos (el taller permite desactivar)
+   - Incluir una hoja adicional llamada `Metadatos` con las filas:
+     `Cliente | [nombre del cliente]` y `Fecha | [fecha de hoy]`
+
+2. **`taller_materialidad_[cliente].html`** — Interfaz interactiva del taller.
+   Es un archivo HTML autocontenido que el consultor abre en Chrome/Edge para
+   conducir la sesión de ponderación. El archivo lee y escribe directamente el
+   Excel anterior usando la File System Access API del browser. Genera este
+   archivo copiando íntegramente el template HTML canónico que está en:
+   `taller_materialidad_TEMPLATE.html` (en la raíz del workspace).
+
+Tras generar ambos archivos, indica al consultor:
+- El nombre exacto de los dos archivos generados
+- Que abra el HTML en Chrome o Edge (no Firefox)
+- Que seleccione el Excel cuando el HTML lo solicite al abrirse
+- Que al terminar el taller, diga "continuar con M2" para que el agente lea
+  el Excel actualizado y calcule el eje Y de la matriz
+
+**El agente NO continúa a M2 hasta recibir confirmación del consultor.**
 
 ---
 
@@ -355,15 +378,17 @@ como respuesta principal** — es ilegible y la interfaz lo oculta. En su lugar:
 cuando la persona lo pida explícitamente. Esto respeta el control del usuario y
 evita llenar el directorio de archivos no solicitados.
 
-### Formato de entregable por etapa (cuando se pidan)
+### Formato de entregable por etapa
 
-- **M1 (temas) y M5 (indicadores):** archivo **XLSX**. Son tablas que el cliente
-  editará y compartirá.
+- **M1 (temas):** dos archivos generados automáticamente y siempre:
+  `materialidad_[cliente]_temas.xlsx` + `taller_materialidad_[cliente].html`.
+  Ver instrucciones detalladas en la sección M1.
 - **M2 (encuesta a stakeholders):** archivo **CSV**. Es para distribuir o importar;
   formato simple.
 - **M3 (matriz de materialidad):** **XLSX** con los datos de coordenadas y, si es
   posible, un gráfico de dispersión. (Un PDF visual de la matriz es deseable como
   mejora futura, no obligatorio en esta versión.)
+- **M5 (indicadores):** archivo **XLSX**. Tabla que el cliente editará y compartirá.
 
 ### Regla de encoding (CRÍTICA para XLSX/CSV)
 
@@ -380,7 +405,9 @@ Usa UTF-8 de extremo a extremo:
 
 ### Nombre de archivos
 
-Usa nombres descriptivos y sin espacios: `temas_materiales_M1_[sector]_[fecha].xlsx`.
+- M1 Excel: `materialidad_[cliente]_temas.xlsx` (ej. `materialidad_Urbaser_temas.xlsx`)
+- M1 HTML: `taller_materialidad_[cliente].html` (ej. `taller_materialidad_Urbaser.html`)
+- M3 y otros: nombres descriptivos sin espacios con fecha: `matriz_materialidad_[cliente]_[fecha].xlsx`
 
 ### Principio general
 
